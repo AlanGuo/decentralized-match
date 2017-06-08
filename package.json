@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "dev": "cross-env NODE_ENV=dev nodemon --debug --config ./.nodemon.json ./playground/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
@@ -11,7 +12,10 @@
   "dependencies": {
     "require-nocache": "^1.0.0",
     "truffle-artifactor": "^2.1.4",
-    "truffle-contract": "^2.0.0",
+    "truffle-contract": "^2.0.1",
     "web3": "^0.19.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.11.0"
   }
 }
