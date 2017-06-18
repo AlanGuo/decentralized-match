@@ -1,0 +1,73 @@
+{
+  /**
+   * Application configuration section
+   * http://pm2.keymetrics.io/docs/usage/application-declaration/
+   */
+  apps : [
+
+    // First application
+    {
+      name      : "viabtc_exchange_cn_frontend",
+      script    : "app.js",
+      instances : 0,
+      exec_mode : "cluster",
+      watch     : false,
+      "ignore_watch" : ["logs",".nuxt"],
+      error_file:"logs/viabtc.stderr.log",
+      out_file  :"logs/viabtc.stdout.log",
+      env: {
+        "NODE_ENV": "dev"
+      },
+      env_production : {
+        "NODE_ENV": "production"
+      },
+      env_pre : {
+        "NODE_ENV": "production",
+        "SERVER_ENV": "pre"
+      }
+    }
+  ],
+
+  /**
+   * Deployment section
+   * http://pm2.keymetrics.io/docs/usage/deployment/
+   */
+  deploy : {
+    production : {
+      user : "root",
+      host : ["localhost"],
+      ref  : "origin/master",
+      "pre-setup" : "export PATH=$PATH:/root/n/bin/ && npm i && npm i pm2 -g",
+      repo : "git@github.com:viabtc/viabtc_exchange_cn_frontend.git",
+      path : "/var/www/viabtc_exchange_cn_frontend",
+      "post-deploy" : "export PATH=$PATH:/root/n/bin/ && npm run build && npm run pm2"
+    },
+    dev : {
+      user : "root",
+      host : "120.77.180.111",
+      key  : "~/.ssh/viabtc-dev",
+      ref  : "origin/develop",
+      "pre-setup" : "export PATH=$PATH:/root/n/bin/ && npm i && npm i pm2 -g",
+      repo : "git@github.com:viabtc/viabtc_exchange_cn_frontend.git",
+      path : "/data/vhosts/viabtc.com/exchange.viabtc.com",
+      "post-deploy" : "export PATH=$PATH:/root/n/bin/ && git checkout develop && npm run pm2-dev",
+      env  : {
+        NODE_ENV: "dev"
+      }
+    },
+
+    alan : {
+      user : "root",
+      host : "120.77.180.111",
+      key  : "~/.ssh/viabtc-dev",
+      ref  : "origin/alan",
+      "pre-setup" : "export PATH=$PATH:/root/n/bin/ && npm i && npm i pm2 -g",
+      repo : "git@github.com:viabtc/viabtc_exchange_cn_frontend.git",
+      path : "/data/vhosts/viabtc.com/exchange.viabtc.com",
+      "post-deploy" : "export PATH=$PATH:/root/n/bin/ && git checkout alan && npm run pm2-dev",
+      env  : {
+        NODE_ENV: "dev"
+      }
+    }
+  }
+}

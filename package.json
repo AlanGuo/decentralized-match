@@ -4,18 +4,43 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "cross-env NODE_ENV=dev nodemon --debug --config ./.nodemon.json ./playground/index.js",
+    "dev": "cross-env NODE_ENV=api-dev DEBUG=nuxt:* nodemon --inspect --config ./.nodemon.json ./app.js",
+    "start": "cross-env NODE_ENV=production node app",
+    "migrate": "truffle migrate",
+    "deploy-dev": "pm2 deploy ecosystem.json dev",
+    "deploy-alan": "pm2 deploy ecosystem.json alan",
+    "deploy-online-setup": "pm2 deploy ecosystem.json production setup",
+    "deploy-pre": "git pull && npm i && nuxt build && pm2 startOrRestart ecosystem.json --env pre",
+    "deploy-online": "git pull && npm i && nuxt build && pm2 startOrRestart ecosystem.json --env production",
+    "pm2-dev": "pm2 startOrRestart ecosystem.json",
+    "pm2": "pm2 startOrRestart ecosystem.json --env production",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "cluster": "^0.7.7",
+    "cookie": "^0.3.1",
+    "cross-env": "^3.2.4",
+    "decimal.js": "^7.2.1",
+    "koa": "^2.2.0",
+    "koa-router": "^7.0.1",
+    "log4js": "^1.1.1",
+    "loggly": "^1.1.1",
     "require-nocache": "^1.0.0",
     "truffle-artifactor": "^2.1.4",
     "truffle-contract": "^2.0.1",
     "web3": "^0.19.0"
   },
   "devDependencies": {
-    "nodemon": "^1.11.0"
+    "nodemon": "^1.11.0",
+    "babel-eslint": "^7.1.1",
+    "babel-plugin-transform-object-rest-spread": "^6.23.0",
+    "eslint": "^3.15.0",
+    "eslint-config-standard": "^6.2.1",
+    "eslint-loader": "^1.6.1",
+    "eslint-plugin-html": "^2.0.3",
+    "eslint-plugin-promise": "^3.4.1",
+    "eslint-plugin-standard": "^2.0.1"
   }
 }

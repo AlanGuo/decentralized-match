@@ -17,7 +17,7 @@
     "services/"
   ],
   "env": {
-    "NODE_ENV": "dev"
+    "NODE_ENV": "api-dev"
   },
   "ext": "js json"
 }

@@ -7,8 +7,8 @@ var requireNoCache = require("require-nocache")(module);
   // The file ./MyContract.sol.js now exists, which you can
   // import into your project like any other Javascript file.
 
-let accountAddress_A = "0x0acea44774aee2300f697effdebd69b4a277e9c1",
-    accountAddress_B = "0x5913f4586ad66109d844d510175479c291322a38"
+let accountAddress_A = "0x5dffdafaf4f57f7679df276196b2a8c61d21ca45",
+    accountAddress_B = "0x30ed7f72b72f73ee9013c2711d572f36e6e4f599"
 
 var MetaCoin = contract(requireNoCache("../build/contracts/MetaCoin.json"))
 var ConvertLib = contract(requireNoCache("../build/contracts/ConvertLib.json"))
